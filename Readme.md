@@ -1,6 +1,6 @@
 #Resume Rater
 
-##Use of LLM API for creating a AI powered Resume Rating System
+##Use of LLM API for creating an AI powered Resume Rating System
 
 ###gemini-1.5-flash-latest is used for rating the resume 
 
@@ -13,4 +13,4 @@ The extracted text is then passed to the LLM API for rating
 The rating is then displayed to the user
 
 
-Python frameworks used is listed in requirements.txt(/requirements.txt)
+Python frameworks used is listed in requirements.txt
