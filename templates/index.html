@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Rater - AI-Powered Resume Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resume Rater <i class="fas fa-file-alt"></i></h1>
+        <p>Upload your resume in PDF format and let our AI-powered system provide instant feedback and rating.</p>
+
+        <form action="/upload" method="post" enctype="multipart/form-data" id="upload-form">
+            <div class="file-upload">
+                <input type="file" id="resume" name="resume" accept="application/pdf" required
+                    onchange="updateFileName(this)">
+                <label for="resume" class="file-upload-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Choose Your Resume
+                </label>
+            </div>
+            <div class="file-name" id="file-name"></div>
+            <button type="submit">
+                <i class="fas fa-magic"></i> Rate My Resume
+            </button>
+        </form>
+
+        <div class="loading" id="loading">
+
+        </div>
+
+        <div id="message" class="message">
+            {% if parsed_output %}
+            <h3>Uploaded Succesfully</h3>
+            {% endif %}
+        </div>
+        {% if parsed_output %}
+        <div class="output" id="output">
+            <button id="button-p" class="buttons">View Positive Points</button>
+            <button id="button-n" class="buttons">View Negative Points</button>
+            <button id="button-rp" class="buttons">View Rating Points</button>
+            <button id="button-re" class="buttons">View Recommendations</button>
+            <button id="button-c" class="buttons">View Conclusion</button>
+        </div>
+        {% endif %}
+
+        {% if parsed_output %}
+        <div class="review-content">
+            {{ parsed_output | safe }}
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            const fileName = input.files[0].name;
+            document.getElementById('file-name').textContent = fileName;
+        }
+
+        document.getElementById('upload-form').onsubmit = function () {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        document.getElementById('button-p').onclick = function () {
+            document.getElementById('positive-points').style.display = 'block';
+            document.getElementById('negative-points').style.display = 'none';
+            document.getElementById('rating').style.display = 'none';
+            document.getElementById('final-thoughts').style.display = 'none';
+            document.getElementById('conclusion').style.display = 'none';
+        }
+
+        document.getElementById('button-n').onclick = function () {
+            document.getElementById('positive-points').style.display = 'none';
+            document.getElementById('negative-points').style.display = 'block';
+            document.getElementById('rating').style.display = 'none';
+            document.getElementById('final-thoughts').style.display = 'none';
+            document.getElementById('conclusion').style.display = 'none';
+        }
+        document.getElementById('button-rp').onclick = function () {
+            document.getElementById('positive-points').style.display = 'none';
+            document.getElementById('negative-points').style.display = 'none';
+            document.getElementById('rating').style.display = 'block';
+            document.getElementById('final-thoughts').style.display = 'none';
+            document.getElementById('conclusion').style.display = 'none';
+        }
+        document.getElementById('button-re').onclick = function () {
+            console.log("HI")
+            document.getElementById('final-thoughts').style.display = 'block';
+            document.getElementById('positive-points').style.display = 'none';
+            document.getElementById('negative-points').style.display = 'none';
+            document.getElementById('rating').style.display = 'none';
+            document.getElementById('conclusion').style.display = 'none';
+        }
+        document.getElementById('button-c').onclick = function () {
+            document.getElementById('conclusion').style.display = 'block';
+            document.getElementById('positive-points').style.display = 'none';
+            document.getElementById('negative-points').style.display = 'none';
+            document.getElementById('rating').style.display = 'none';
+            document.getElementById('final-thoughts').style.display = 'none';
+        }
+        if (document.getElementById('false-doc') != null) {
+            console.log("HI");
+            document.getElementById('output').style.display = 'none';
+        }
+
+    </script>
+</body>
+
+</html>
