@@ -1,25 +1,31 @@
-<img width="1039" height="713" alt="Screenshot 2025-07-28 at 10 18 38 AM" src="https://github.com/user-attachments/assets/1b64ae25-39c7-4637-b975-8374d266d97a" /><img width="1039" height="713" alt="Screenshot 2025-07-28 at 10 18 38 AM" src="https://github.com/user-attachments/assets/942be3b7-5e0e-4374-81bb-ad69d261c935" />#Resume Rater
+# Resume Rater
 
-##Use of LLM API for creating an AI powered Resume Rating System
+## Use of LLM API for Creating an AI Powered Resume Rating System
 
-###gemini-1.5-flash-latest is used for rating the resume 
+### `gemini-1.5-flash-latest` is used for rating the resume
 
-https://deepmind.google/technologies/gemini/flash/   **Link to read more about gemini**
+Read more about Gemini: [https://deepmind.google/technologies/gemini/flash/](https://deepmind.google/technologies/gemini/flash/)
 
-You need to create .env file in your folder and paste the GEMINI_API_KEY in that
+### Setup Instructions
 
-The user uploads their resume in .pdf format
-The text is extracted from the resume using pypdf2(python library)
-The extracted text is then passed to the LLM API for rating
-The rating is then displayed to the user
+1. Create a `.env` file in your project folder.
+2. Paste your `GEMINI_API_KEY` in the `.env` file.
 
+### How It Works
 
-Python frameworks used is listed in requirements.txt
+- The user uploads their resume in `.pdf` format.
+- The text is extracted from the resume using the `PyPDF2` Python library.
+- The extracted text is passed to the LLM API for rating.
+- The rating is displayed to the user.
 
+### Python Frameworks and Libraries
 
-Here are some of the images for the project
+All required Python packages are listed in `requirements.txt`.
 
+---
 
-![alt text](<Screenshot 2025-07-28 at 10.18.38 AM.png>)
+## Project Screenshots
 
-![alt text](<Screenshot 2025-07-28 at 10.20.22 AM.png>)
+![Screenshot 1](Images/Image.png)
+
+![Screenshot 2](Images/Image2.png)
