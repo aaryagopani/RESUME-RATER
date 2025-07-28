@@ -3,44 +3,14 @@ import PyPDF2
 from dotenv import load_dotenv
 import google.generativeai as genai
 from langchain.prompts import PromptTemplate
-from langchain.output_parsers import RegexParser
-from functions import get_gemini_response_first, format_review
-from flask import Flask, render_template, request, redirect, url_for
+from functions import get_gemini_response_first
+from flask import Flask, render_template, request
 
-# This code is to load the environment variables from a .env file into your program's environment
 load_dotenv()
 
-
-# This code is use to load the API key securely and establish autenthication
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-
-# This line of code connects to a specific model within the genai library
 model = genai.GenerativeModel("models/gemini-1.5-flash-latest")
-
-
-# This code is to generate the response from the model we choose
-
-
-# input_prompt = """
-# You are an expert for reviewing resume of people and you have to rate the resume
-# The resume is a pdf that has been extracted as text and is given below
-# {text}
-# Give the three positive points and three negative points(you roast the resume as a part of negative points) in the given format
-# 1.Positive Points
-#   a. First Positive Point
-#   b. Second Positive Point
-#   c. Third Positive Point
-# 2.Negative Points
-#   a. First Negative Point
-#   b. Second Negative Point
-#   c. Third Negative Point
-  
-# Also rate my resume out of 5, the answer can be even in decimal format like 4.8
-# If the text is not about a resume than give the below answer directly
-# Output in HTML Format
-# {default_answer}
-# """
 
 input_prompt = """You're an expert resume reviewer with years of experience. Analyze the uploaded document and respond as follows:
 
@@ -110,7 +80,6 @@ default_answer = """Sorry,I am a AI based resume rater and the uploaded pdf does
 
 
 
-# Intializing the flask app
 app = Flask(__name__)
 
 
@@ -136,11 +105,8 @@ def upload_file():
         input_variables=["text", "default_answer"], template=input_prompt
     )
     review = get_gemini_response_first(model, prompt, default_answer, pdf_text)
-    # print("Generated Review Text:\n", review)
-    # parsed_output = parser.parse(review)
-    # print(parsed_output)
-    return render_template("index.html", parsed_output=review)
 
+    return render_template("index.html", parsed_output=review)
 
 if __name__ == "__main__":
     app.run(debug=True)
